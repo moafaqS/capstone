@@ -7,14 +7,15 @@ import json
 from models import create_app, Movie, Actor
 from auth import AuthError, requires_auth 
 
-APP = create_app()
+
+app = create_app()
 
 
 
 '''
 Movies End points
 '''
-@APP.route('/movies' , methods=['GET'])
+@app.route('/movies' , methods=['GET'])
 @requires_auth('get:movies')
 def get_movies(jwt):
     movies = Movie.query.all()
@@ -23,7 +24,7 @@ def get_movies(jwt):
         'Movies': [movie.format() for movie in movies]
     }), 200
 
-@APP.route('/movies/<int:id>')
+@app.route('/movies/<int:id>')
 @requires_auth('get:movies')
 def get_movie(jwt,id):
   
@@ -38,7 +39,7 @@ def get_movie(jwt,id):
     abort(404)
 
 
-@APP.route('/movies' , methods=['POST'])
+@app.route('/movies' , methods=['POST'])
 @requires_auth('post:movies')
 def post_movie(jwt):
   body = request.get_json()
@@ -57,7 +58,7 @@ def post_movie(jwt):
   except:
     abort(422)
 
-@APP.route('/movies/<int:id>' , methods=['DELETE'])
+@app.route('/movies/<int:id>' , methods=['DELETE'])
 @requires_auth('delete:movies')
 def delete_movie(jwt,id):
 
@@ -69,7 +70,7 @@ def delete_movie(jwt,id):
     abort(422)
 
 
-@APP.route('/movies/<int:id>' , methods=['PATCH'])
+@app.route('/movies/<int:id>' , methods=['PATCH'])
 @requires_auth('patch:movies')
 def update_movie(jwt,id):
   if id is None:
@@ -98,7 +99,7 @@ def update_movie(jwt,id):
 Actor End points
 '''
 
-@APP.route('/actors' , methods=['GET'])
+@app.route('/actors' , methods=['GET'])
 @requires_auth('get:actors')
 def get_actors(jwt):
     actors = Actor.query.all()
@@ -107,7 +108,7 @@ def get_actors(jwt):
         'actors': [actor.format() for actor in actors]
     }), 200
 
-@APP.route('/actors/<int:id>')
+@app.route('/actors/<int:id>')
 @requires_auth('get:actors')
 def get_actor(jwt,id):
   
@@ -121,7 +122,7 @@ def get_actor(jwt,id):
   except:
     abort(404)
 
-@APP.route('/actors' , methods=['POST'])
+@app.route('/actors' , methods=['POST'])
 @requires_auth('post:actors')
 def post_actor(jwt):
   body = request.get_json()
@@ -143,7 +144,7 @@ def post_actor(jwt):
   except:
     abort(422)
 
-@APP.route('/actors/<int:id>' , methods=['DELETE'])
+@app.route('/actors/<int:id>' , methods=['DELETE'])
 @requires_auth('delete:actors')
 def delete_actor(jwt,id):
 
@@ -155,7 +156,7 @@ def delete_actor(jwt,id):
     abort(422)
 
 
-@APP.route('/actors/<int:id>' , methods=['PATCH'])
+@app.route('/actors/<int:id>' , methods=['PATCH'])
 @requires_auth('patch:actors')
 def update_actor(jwt,id):
   if id is None:
@@ -186,7 +187,7 @@ def update_actor(jwt,id):
 '''
 Error Handler
 '''
-@APP.errorhandler(422)
+@app.errorhandler(422)
 def unprocessable(error):
     return jsonify({
                     "success": False, 
@@ -194,7 +195,7 @@ def unprocessable(error):
                     "message": "unprocessable"
                     }), 422
 
-@APP.errorhandler(404)
+@app.errorhandler(404)
 def resourceNotFound(error):
     return jsonify({
                     "success": False, 
@@ -202,7 +203,7 @@ def resourceNotFound(error):
                     "message": "resource not found"
                     }), 404
 
-@APP.errorhandler(AuthError)
+@app.errorhandler(AuthError)
 def auth_error(error):
     return jsonify({
         "success": False,
@@ -212,6 +213,5 @@ def auth_error(error):
 
 
 
-
 if __name__ == '__main__':
-    APP.run(host='0.0.0.0', port=8080, debug=True)
+    app.run()
