@@ -47,14 +47,14 @@ class Movie(db.Model):
   def update(self):
     db.session.commit() 
 
-class Acors(db.Model):
+class Actor(db.Model):
   __tablename__ = 'Actor'
   id =  db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String)
   age = db.Column(db.Integer)
-  gender = db.Column(db.Integer)
+  gender = db.Column(db.String)
 
-  def __init__(self, name, age , gender ):
+  def __init__(self, name, age , gender):
     self.name = name
     self.age = age
     self.gender = gender

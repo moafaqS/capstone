@@ -4,7 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import json
 
-from models import create_app, Movie, Acors
+from models import create_app, Movie, Actor
+from auth import AuthError, requires_auth 
 
 APP = create_app()
 
@@ -14,7 +15,8 @@ APP = create_app()
 Movies End points
 '''
 @APP.route('/movies' , methods=['GET'])
-def get_movies():
+@requires_auth('get:movies')
+def get_movies(jwt):
     movies = Movie.query.all()
     return jsonify({
         'success': True,
@@ -22,7 +24,8 @@ def get_movies():
     }), 200
 
 @APP.route('/movies/<int:id>')
-def get_movie(id):
+@requires_auth('get:movies')
+def get_movie(jwt,id):
   
   try:
     movie = Movie.query.filter(Movie.id == id).one_or_none()
@@ -34,8 +37,10 @@ def get_movie(id):
   except:
     abort(404)
 
+
 @APP.route('/movies' , methods=['POST'])
-def post_movie():
+@requires_auth('post:movies')
+def post_movie(jwt):
   body = request.get_json()
   title = body.get('title')
   releaseDate = body.get('releaseDate')
@@ -53,7 +58,8 @@ def post_movie():
     abort(422)
 
 @APP.route('/movies/<int:id>' , methods=['DELETE'])
-def delete(id):
+@requires_auth('delete:movies')
+def delete_movie(jwt,id):
 
   try:
     movie = Movie.query.filter(Movie.id == id).one_or_none()
@@ -64,7 +70,8 @@ def delete(id):
 
 
 @APP.route('/movies/<int:id>' , methods=['PATCH'])
-def update(id):
+@requires_auth('patch:movies')
+def update_movie(jwt,id):
   if id is None:
     abort(404)
 
@@ -91,6 +98,89 @@ def update(id):
 Actor End points
 '''
 
+@APP.route('/actors' , methods=['GET'])
+@requires_auth('get:actors')
+def get_actors(jwt):
+    actors = Actor.query.all()
+    return jsonify({
+        'success': True,
+        'actors': [actor.format() for actor in actors]
+    }), 200
+
+@APP.route('/actors/<int:id>')
+@requires_auth('get:actors')
+def get_actor(jwt,id):
+  
+  try:
+    actor = Actor.query.filter(Actor.id == id).one_or_none()
+
+    return  jsonify({
+      'success' : True , 
+      'actor' : actor.format()
+    })
+  except:
+    abort(404)
+
+@APP.route('/actors' , methods=['POST'])
+@requires_auth('post:actors')
+def post_actor(jwt):
+  body = request.get_json()
+  
+  name = body.get('name')
+  age = body.get('age')
+  gender = body.get('Gender')
+  
+
+  try:
+    actor = Actor(name=name,age=age,gender=gender)
+    Actor.insert(actor)
+
+    return jsonify({
+      'success': True,
+      'Movies': actor.format()
+    }), 200
+
+  except:
+    abort(422)
+
+@APP.route('/actors/<int:id>' , methods=['DELETE'])
+@requires_auth('delete:actors')
+def delete_actor(jwt,id):
+
+  try:
+    actor = Actor.query.filter(Actor.id == id).one_or_none()
+    actor.delete()
+    return jsonify({"success": True, "delete": id})
+  except:
+    abort(422)
+
+
+@APP.route('/actors/<int:id>' , methods=['PATCH'])
+@requires_auth('patch:actors')
+def update_actor(jwt,id):
+  if id is None:
+    abort(404)
+
+  try:
+    body = request.get_json()
+    name = body.get('name')
+    age = body.get('age')
+    gender = body.get('gender')
+
+    actor = Actor.query.filter(Actor.id == id).one_or_none()
+    actor.name = name
+    actor.age = age
+    actor.gender = gender
+
+    actor.update()
+
+    return jsonify({
+      'success': True,
+      'Movies': actor.format()
+    }), 200
+
+  except:
+    abort(422)
 
 
 '''
@@ -111,6 +201,14 @@ def resourceNotFound(error):
                     "error": 404,
                     "message": "resource not found"
                     }), 404
+
+@APP.errorhandler(AuthError)
+def auth_error(error):
+    return jsonify({
+        "success": False,
+        "error": error.status_code,
+        "message": error.error['description']
+    }), error.status_code
 
 
 
