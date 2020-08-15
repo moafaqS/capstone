@@ -4,13 +4,17 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import json
 
-from models import create_app, Movie, Actor
+from models import setup_app, Movie, Actor
 from auth import AuthError, requires_auth 
 
 
+def create_app():
+  app = Flask(__name__)
+  setup_app(app)
+  CORS(app)
+  return app
+
 app = create_app()
-
-
 
 '''
 Movies End points
