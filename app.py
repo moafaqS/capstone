@@ -4,25 +4,18 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import json
 
-from models import setup_app, Movie, Actor
+from models import create_app, Movie, Actor
 from auth import AuthError, requires_auth 
 
-
-def create_app():
-  app = Flask(__name__)
-  setup_app(app)
-  CORS(app)
-
-
-  return app
-
 app = create_app()
+
+
 
 '''
 Movies End points
 '''
 @app.route('/movies' , methods=['GET'])
-
+@requires_auth('get:movies')
 def get_movies(jwt):
     movies = Movie.query.all()
     return jsonify({
@@ -219,5 +212,6 @@ def auth_error(error):
 
 
 
+
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8080, debug=True)

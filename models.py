@@ -8,7 +8,7 @@ database_path = os.environ['DATABASE_URL']
 conn = psycopg2.connect(database_path, sslmode='require')
 db = SQLAlchemy()
 
-def setup_app(app, database_path=database_path):
+def create_app():
   # create and configure the app
   app = Flask(__name__)
   app.config["SQLALCHEMY_DATABASE_URI"] = database_path
@@ -17,7 +17,10 @@ def setup_app(app, database_path=database_path):
   db.init_app(app)
   db.create_all()
   
+  
+  CORS(app)
 
+  return app
 
 class Movie(db.Model):
   __tablename__ = 'Movie'
@@ -75,8 +78,3 @@ class Actor(db.Model):
 
   def update(self):
     db.session.commit() 
-
-
-
-
-
