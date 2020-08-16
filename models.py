@@ -10,7 +10,6 @@ def setup_app(app, database_path=database_path):
   # create and configure the app
   app = Flask(__name__)
   app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-  app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
   db.app = app
   db.init_app(app)
   db.create_all()
