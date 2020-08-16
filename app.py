@@ -20,7 +20,7 @@ app = create_app()
 Movies End points
 '''
 @app.route('/movies' , methods=['GET'])
-@requires_auth('get:movies')
+
 def get_movies(jwt):
     movies = Movie.query.all()
     return jsonify({
