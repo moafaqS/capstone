@@ -12,6 +12,8 @@ def create_app():
   app = Flask(__name__)
   setup_app(app)
   CORS(app)
+
+
   return app
 
 app = create_app()

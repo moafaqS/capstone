@@ -2,8 +2,10 @@ import os
 from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import psycopg2
 
 database_path = os.environ['DATABASE_URL']
+conn = psycopg2.connect(database_path, sslmode='require')
 db = SQLAlchemy()
 
 def setup_app(app, database_path=database_path):
