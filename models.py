@@ -8,7 +8,7 @@ database_path = os.environ['DATABASE_URL']
 conn = psycopg2.connect(database_path, sslmode='require')
 db = SQLAlchemy()
 
-def create_app():
+def setup_db(app, database_path=database_path):
   # create and configure the app
   app = Flask(__name__)
   app.config["SQLALCHEMY_DATABASE_URI"] = database_path
