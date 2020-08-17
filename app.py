@@ -7,7 +7,7 @@ import json
 from models import setup_db, Movie, Actor
 from auth import AuthError, requires_auth 
 
-#app = create_app()
+app = create_app()
 
 def create_app():
   # create and configure the app
