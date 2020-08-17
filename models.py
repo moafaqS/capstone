@@ -6,7 +6,7 @@ from flask_cors import CORS
 database_path = os.environ['DATABASE_URL']
 db = SQLAlchemy()
 
-def setup_app():
+def setup_app(app, database_path=database_path):
   # create and configure the app
   app = Flask(__name__)
   app.config["SQLALCHEMY_DATABASE_URI"] = database_path
