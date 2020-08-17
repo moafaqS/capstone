@@ -4,8 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import psycopg2
 
-database_path = os.environ['DATABASE_URL']
-conn = psycopg2.connect(database_path, sslmode='require')
+ENV = 'dev'
+
+if ENV == 'dev':
+    database_name = "Capstone"
+    database_path = "postgres://{}/{}".format(
+        'localhost:5432', database_name)
+else:
+    database_path = os.environ['DATABASE_URL']
+    conn = psycopg2.connect(database_path, sslmode='require')
 db = SQLAlchemy()
 
 def create_app():
