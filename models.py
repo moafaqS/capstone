@@ -4,10 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import psycopg2
 
-ENV = 'dev'
-
-
-    
 database_path = os.environ['DATABASE_URL']
 conn = psycopg2.connect(database_path, sslmode='require')
 db = SQLAlchemy()

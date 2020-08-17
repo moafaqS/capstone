@@ -20,7 +20,6 @@ def create_app():
   Movies End points
   '''
   @app.route('/movies' , methods=['GET'])
-  
   def get_movies():
       movies = Movie.query.all()
       return jsonify({
