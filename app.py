@@ -22,7 +22,8 @@ def create_app():
   Movies End points
   '''
   @app.route('/movies' , methods=['GET'])
-  def get_movies():
+  @requires_auth('get:movies')
+  def get_movies(jwt):
       movies = Movie.query.all()
       return jsonify({
           'success': True,
@@ -215,6 +216,11 @@ def create_app():
           "error": error.status_code,
           "message": error.error['description']
       }), error.status_code
+  
+  if ENV == 'dev':
+    app.run(host='127.0.0.1', port=5000, debug=True)
+  else:
+    app.run(debug=False)
 
 
   return app
