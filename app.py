@@ -10,6 +10,7 @@ from auth import AuthError, requires_auth
 
 
 def create_app():
+  ENV = 'dev'
   # create and configure the app
   app = Flask(__name__)
   setup_db(app)
@@ -21,8 +22,7 @@ def create_app():
   Movies End points
   '''
   @app.route('/movies' , methods=['GET'])
-  @requires_auth('get:movies')
-  def get_movies(jwt):
+  def get_movies():
       movies = Movie.query.all()
       return jsonify({
           'success': True,
