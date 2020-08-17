@@ -8,7 +8,7 @@ import psycopg2
 
 database_name = "Capstone"
 database_path = os.environ['DATABASE_URL']
-#conn = psycopg2.connect(database_path, sslmode='require')
+conn = psycopg2.connect(database_path, sslmode='require')
 
 db = SQLAlchemy()
 

@@ -7,7 +7,7 @@ import json
 from models import setup_db, Movie, Actor
 from auth import AuthError, requires_auth 
 
-#app = setup_app()
+
 
 def create_app():
   # create and configure the app
@@ -216,9 +216,9 @@ def create_app():
           "message": error.error['description']
       }), error.status_code
 
-  if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000, debug=True)
+
   return app
 
+app = create_app()
 
 
