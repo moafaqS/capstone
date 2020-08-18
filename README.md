@@ -1,8 +1,39 @@
-# capstone
+# Casting Agency 
 This project is the final project for the Udacity Full Stack Developer Nanodegree 
 
+Casting Agency Specifications
+The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
+
+
 ## Roles
-Use the follwing token to test the end point .
+    Casting Assistant:
+        Can view actors and movies
+    Casting Director:
+        All permissions a Casting Assistant has and…
+        Add or delete an actor from the database
+        Modify actors or movies
+    Executive Producer:
+        All permissions a Casting Director has and…
+        Add or delete a movie from the database
+        
+# Dependencies:
+
+For this project you need to intall Python3 (https://www.python.org/) 
+Make sure to install the following packages afterward:
+1.	Flask
+2.	Flask-Migrate
+3.	Flask-Script
+4.	Flask-SQL Alchemy
+5.	SQL-Alchemy
+6.	Flask-RESTful
+7.	Gunicorn and
+8.	Pyscopg2 
+
+
+
+# Authentication:
+Currently there are three users created in AUTH0.com :
+you can use these token to test the app
 ### CastingAssistant
 
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImNQTExBUmF0aDZTTFhBUl82N0NhRyJ9.eyJpc3MiOiJodHRwczovL21vYWZhcS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWYzN2M3YzY3M2VkYzEwMDNkNjUwMDY2IiwiYXVkIjoiQ2Fwc3RvbmUiLCJpYXQiOjE1OTc3MzAyMTIsImV4cCI6MTU5NzgxNjYxMCwiYXpwIjoiZFRITFFNVUhqbHNjc0pQWlFvN1h4dEFTVERLcmNMbFoiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.dgbD_StKSbU3GsL9qHSkkrk1kkUo6R27k3jKiBAnfiyMJOtYx-n9Ebp_4_WpHug6s8_xGs7eR-09ttA_MJT07_p7L0O-sM2WX0GuefC8KDQAVu2LpcKIjDmFc5Sphkt-AdxoWWXcdq0fbTT4AEgnk-wkvW1CZu3lNCyKVmkC7YeG9s6R8MGPZwAtCfscd2_fJ2p3_zQeMs59-I8AicDgdfwtTgIKEp7219Mw6XeeoPq1r_0qPPCgqLccwCT5sNRmBIskBLEmvXShzQf8H0xYfXvWTE2DLRKz5RM5CnwDcettzQuk4osHzOz3_lpAN2pK7_p8l-EAWY3sDDf0R-zZHw
