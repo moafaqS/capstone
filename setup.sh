@@ -1,1 +1,0 @@
-export DB_URI = 'postgres://afzdpzfoxljpbd:36edfcf2898090c0bba88bf6b1af03e6c54b97310458b55b0d042bd9f557c0c9@ec2-18-215-99-63.compute-1.amazonaws.com:5432/d23ph06j7evg3e'
