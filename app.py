@@ -10,7 +10,7 @@ from auth import AuthError, requires_auth
 
 
 def create_app():
-  ENV = 'dev'
+ 
   # create and configure the app
   app = Flask(__name__)
   setup_db(app)
@@ -30,19 +30,7 @@ def create_app():
           'Movies': [movie.format() for movie in movies]
       }), 200
 
-  @app.route('/movies/<int:id>')
-  @requires_auth('get:movies')
-  def get_movie(jwt,id):
-    
-    try:
-      movie = Movie.query.filter(Movie.id == id).one_or_none()
-
-      return  jsonify({
-        'success' : True , 
-        'Movies' : movie.format()
-      })
-    except:
-      abort(404)
+ 
 
 
   @app.route('/movies' , methods=['POST'])
@@ -58,13 +46,13 @@ def create_app():
 
       return jsonify({
         'success': True,
-        'Movies': [movie.format()]
+        'Movies': movie.format()
       }), 200
 
     except:
       abort(422)
 
-  @app.route('/movies/<int:id>' , methods=['DELETE'])
+  @app.route('/movies/delete/<int:id>' , methods=['DELETE'])
   @requires_auth('delete:movies')
   def delete_movie(jwt,id):
 
@@ -73,7 +61,7 @@ def create_app():
       movie.delete()
       return jsonify({"success": True, "delete": id})
     except:
-      abort(422)
+      abort(404)
 
 
   @app.route('/movies/<int:id>' , methods=['PATCH'])
@@ -94,7 +82,7 @@ def create_app():
 
       return jsonify({
         'success': True,
-        'Movies': [movie.format()]
+        'Movies': movie.format()
       }), 200
 
     except:
@@ -114,19 +102,7 @@ def create_app():
           'actors': [actor.format() for actor in actors]
       }), 200
 
-  @app.route('/actors/<int:id>')
-  @requires_auth('get:actors')
-  def get_actor(jwt,id):
-    
-    try:
-      actor = Actor.query.filter(Actor.id == id).one_or_none()
 
-      return  jsonify({
-        'success' : True , 
-        'actor' : actor.format()
-      })
-    except:
-      abort(404)
 
   @app.route('/actors' , methods=['POST'])
   @requires_auth('post:actors')
@@ -136,6 +112,7 @@ def create_app():
     name = body.get('name')
     age = body.get('age')
     gender = body.get('Gender')
+    
     
 
     try:
@@ -217,10 +194,7 @@ def create_app():
           "message": error.error['description']
       }), error.status_code
   
-  if ENV == 'dev':
-    app.run(host='127.0.0.1', port=5000, debug=True)
-  else:
-    app.run(debug=False)
+
 
 
   return app
