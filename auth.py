@@ -8,6 +8,7 @@ AUTH0_DOMAIN = 'moafaq.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'Capstone'
 
+
 ## AuthError Exception
 '''
 AuthError Exception

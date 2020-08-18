@@ -8,6 +8,7 @@ from app import create_app
 from models import setup_db,  Movie, Actor
 
 
+
 def mock_decorator(permission=''):
     def requires_auth_decorator(f):
         @wraps(f)
@@ -63,6 +64,11 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
 
+    def test_create_movie_fail(self):
+        res = self.client().post('/movies')
+        self.assertEqual(res.status_code, 400)
+        
+
     def test_create_actor(self):
         actor = {
             'name': 'moafaq',
@@ -73,6 +79,10 @@ class CapstoneTestCase(unittest.TestCase):
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
+
+    def test_create_actor_fail(self):
+        res = self.client().post('/actors')
+        self.assertEqual(res.status_code, 400)
 
     def test_get_movies(self):
         res = self.client().get('/movies')
@@ -163,7 +173,13 @@ class CapstoneTestCase(unittest.TestCase):
         }
         res = self.client().patch('/actors/2000', json=actor)
         self.assertEqual(res.status_code, 404)
-    
+
+
+
+ 
+
+
+
 
 
 if __name__ == "__main__":

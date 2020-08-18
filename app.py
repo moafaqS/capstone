@@ -18,6 +18,10 @@ def create_app():
   CORS(app)
   cors = CORS(app, resources={r"/": {"origins": "*"}})
 
+  @app.route('/')
+  def welcome():
+    return 'welcome to capstone project'
+
   '''
   Movies End points
   '''
@@ -37,6 +41,11 @@ def create_app():
   @requires_auth('post:movies')
   def post_movie(jwt):
     body = request.get_json()
+
+    if not body:
+      abort(400)
+          
+          
     title = body.get('title')
     releaseDate = body.get('releaseDate')
 
@@ -108,6 +117,9 @@ def create_app():
   @requires_auth('post:actors')
   def post_actor(jwt):
     body = request.get_json()
+
+    if not body:
+      abort(400)
     
     name = body.get('name')
     age = body.get('age')
@@ -185,6 +197,14 @@ def create_app():
                       "error": 404,
                       "message": "resource not found"
                       }), 404
+
+  @app.errorhandler(400)
+  def resourceNotFound(error):
+      return jsonify({
+                      "success": False, 
+                      "error": 400,
+                      "message": "Bad Request"
+                      }), 400
 
   @app.errorhandler(AuthError)
   def auth_error(error):
