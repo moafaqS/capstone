@@ -10,7 +10,7 @@ https://capstone-final-udacity-project.herokuapp.com/
 The endpoints : 
 
 
-
+## Movies Endpoint
 GET '/movies'
     fetches all the movies in the database as json 
 
@@ -26,7 +26,7 @@ PATCH '/movies/int:movie_id'
 
 
 
-
+## Actors Endpoint
 GET '/actors'
     fetches all the actors in the databse as json 
     
