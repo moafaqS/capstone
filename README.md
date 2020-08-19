@@ -70,8 +70,7 @@ The endpoints :
 ### Movies Endpoint
 #### GET '/movies'
     fetches all the movies in the database as json 
-    
-    https://capstone-final-udacity-project.herokuapp.com/movies
+
     
 ##### Example response
 ```js
@@ -90,8 +89,7 @@ The endpoints :
 
 #### POST '/movies'
     create a new movie in the database based on the json that is in the body of the request 
-    
-    https://capstone-final-udacity-project.herokuapp.com/movies
+
     
 ##### Example body
 ```js
