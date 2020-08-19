@@ -73,7 +73,7 @@ GET '/movies'
     
     https://capstone-final-udacity-project.herokuapp.com/movies
     
-    #### Example response
+#### Example response
 ```js
 {
     "Movies": [
@@ -93,7 +93,7 @@ POST '/movies'
     
     https://capstone-final-udacity-project.herokuapp.com/movies
     
-    #### Example json
+#### Example json
 ```js
 {
     "Movie": 
