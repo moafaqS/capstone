@@ -120,21 +120,111 @@ The endpoints :
 #### DELETE '/movies/delete/movieId'
     This endpoint will delete the movie based on movie ID that is passed 
     
-
+##### Example response
+```js     
+{
+    "delete": 2,
+    "success": true
+}
+``` 
+##### Example no Permission response
+```js  
+{
+    "error": 403,
+    "message": "Permission not found.",
+    "success": false
+}
+``` 
 #### PATCH '/movies/int:movie_id'
     This endpoint will modify the movie  based on movie ID that is passed and on the json that is passed into the body of the request 
-
-
+##### Example body 
+```js  
+{
+    "releaseDate": "2010",
+    "title": "updated title"
+}
+```
+##### Example response 
+```js  
+{
+    "Movies": {
+        "id": 6,
+        "releaseDate": "2010",
+        "title": "updated title"
+    },
+    "success": true
+}
+```
 
 ### Actors Endpoint
 #### GET '/actors'
     fetches all the actors in the databse as json 
     
+##### Example response 
+```js     
+{
+    "actors": [
+        {
+            "age": 21,
+            "gender": "male",
+            "id": 2,
+            "name": "moafaq"
+        }
+    ],
+    "success": true
+}
+```
+    
 #### POST '/actors'
-    This endpoint will create a new actor in the database based on the json that is in the body of the request 
- 
+    This endpoint will create a new actor in the database based on the json that is in the body of the request
+##### Example body 
+```js  
+{
+    "age": 21,
+    "gender": "male",
+    "name": "moafaq"
+}
+```
+##### Example response 
+```js  
+{
+    "Actors": {
+        "age": 21,
+        "gender": null,
+        "id": 3,
+        "name": "moafaq"
+    },
+    "success": true
+}
+```
 #### DELETE '/actors/actorID'
     This endpoint will delete the actor based on actor ID that is passed 
-
+##### Example response 
+```js  
+{
+    "delete": 3,
+    "success": true
+}
+```
 #### PATCH '/actors/actorID' 
     This endpoint will modify the actor based on actor ID that is passed into the url and on the json that is passed into the body of the request 
+##### Example body 
+```js     
+{
+    "age": 21,
+    "gender": "male",
+    "name": "updated name"
+}
+```
+##### Example response 
+```js     
+{
+    "Actors": {
+        "age": 21,
+        "gender": "male",
+        "id": 2,
+        "name": "updated name"
+    },
+    "success": true
+}
+```
