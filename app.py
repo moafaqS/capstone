@@ -133,7 +133,7 @@ def create_app():
 
       return jsonify({
         'success': True,
-        'Movies': actor.format()
+        'Actors': actor.format()
       }), 200
 
     except:
@@ -172,7 +172,7 @@ def create_app():
 
       return jsonify({
         'success': True,
-        'Movies': actor.format()
+        'Actors': actor.format()
       }), 200
 
     except:
