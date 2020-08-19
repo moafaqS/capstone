@@ -32,13 +32,13 @@ Make sure to install the following packages afterward:
 # Local Development
 
 follow the steps to run app localy in your machine 
-    1 - clone the project 
-    2 - set database_name and database_path in models.py to the following 
+#### 1 - clone the project 
+#### 2 - set database_name and database_path in models.py to the following 
 
         database_name = "Capstone"
         database_path = "postgres://{}/{}".format('localhost:5432', database_name)
     
-    3 - run "flask run" in the command line 
+#### 3 - run "flask run" in the command line 
 
 
 
