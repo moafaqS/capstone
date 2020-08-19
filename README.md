@@ -68,12 +68,12 @@ The endpoints :
 
 
 ### Movies Endpoint
-GET '/movies'
+#### GET '/movies'
     fetches all the movies in the database as json 
     
     https://capstone-final-udacity-project.herokuapp.com/movies
     
-#### Example response
+##### Example response
 ```js
 {
     "Movies": [
@@ -88,12 +88,12 @@ GET '/movies'
 ```
     
 
-POST '/movies'
+#### POST '/movies'
     create a new movie in the database based on the json that is in the body of the request 
     
     https://capstone-final-udacity-project.herokuapp.com/movies
     
-#### Example json
+##### Example body
 ```js
 {
     "Movie": 
@@ -104,7 +104,7 @@ POST '/movies'
 
 }
 ```
-    #### Example response
+##### Example response
 ```js
 {
     "Movies": 
@@ -117,24 +117,24 @@ POST '/movies'
 }
 ```
 
-DELETE '/movies/delete/movieId'
+#### DELETE '/movies/delete/movieId'
     This endpoint will delete the movie based on movie ID that is passed 
     
 
-PATCH '/movies/int:movie_id'
+#### PATCH '/movies/int:movie_id'
     This endpoint will modify the movie  based on movie ID that is passed and on the json that is passed into the body of the request 
 
 
 
 ### Actors Endpoint
-GET '/actors'
+#### GET '/actors'
     fetches all the actors in the databse as json 
     
-POST '/actors'
+#### POST '/actors'
     This endpoint will create a new actor in the database based on the json that is in the body of the request 
  
-DELETE '/actors/actorID'
+#### DELETE '/actors/actorID'
     This endpoint will delete the actor based on actor ID that is passed 
 
-PATCH '/actors/actorID' 
+#### PATCH '/actors/actorID' 
     This endpoint will modify the actor based on actor ID that is passed into the url and on the json that is passed into the body of the request 
