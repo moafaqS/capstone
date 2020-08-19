@@ -125,14 +125,7 @@ The endpoints :
     "success": true
 }
 ``` 
-##### Example no Permission response
-```js  
-{
-    "error": 403,
-    "message": "Permission not found.",
-    "success": false
-}
-``` 
+
 #### PATCH '/movies/int:movie_id'
     This endpoint will modify the movie  based on movie ID that is passed and on the json that is passed into the body of the request 
 ##### Example body 
